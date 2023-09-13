@@ -1,11 +1,8 @@
 import "./App.css";
+import Body from "./components/Body";
 
 function App() {
-  return (
-    <div className="m-4 p-4 font-bold text-lg justify-center text-slate-800">
-      Soham's OTT Streaming APP
-    </div>
-  );
+  return <Body />;
 }
 
 export default App;
