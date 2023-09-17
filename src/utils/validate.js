@@ -23,3 +23,7 @@ export const checkValidName = (name) => {
   }
   return "";
 };
+
+export const trimText = (text, length) => {
+  return text.slice(0, length) + "...";
+};

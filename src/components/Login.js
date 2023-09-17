@@ -1,22 +1,22 @@
-import React, { useRef, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import React, { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { BACKGROUND_IMAGE_URL, PHOTO_URL } from "../utils/consts";
+import { auth } from "../utils/firebase";
+import { loginUser } from "../utils/userSlice";
 import {
   checkValidEmail,
   checkValidName,
   checkValidPassword,
 } from "../utils/validate";
 import Header from "./Header";
-import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../utils/userSlice";
 
 const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [isSignInFrom, setIsSignInForm] = useState(true);
@@ -49,7 +49,7 @@ const Login = () => {
         .then((userCredential) => {
           updateProfile(auth.currentUser, {
             displayName: name.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/76684111?v=4",
+            photoURL: PHOTO_URL,
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -62,7 +62,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/browse");
             })
             .catch((error) => {
               const errorMessage = error.message;
@@ -70,9 +69,8 @@ const Login = () => {
             });
         })
         .catch((error) => {
-          const errorCode = error.code;
           const errorMessage = error.message;
-          setPasswordError(errorCode + "-" + passwordError);
+          setPasswordError(errorMessage + "-" + passwordError);
         });
     } else {
       signInWithEmailAndPassword(
@@ -82,7 +80,6 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -93,15 +90,12 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="relative h-screen overflow-hidden">
+      <div
+        className="absolute inset-0 w-full h-full bg-cover bg-no-repeat"
+        style={{ backgroundImage: `url(${BACKGROUND_IMAGE_URL})` }}
+      ></div>
       <Header />
-      <div className="absolute">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/42df4e1f-bef6-499e-87ff-c990584de314/5e7c383c-1f88-4983-b4da-06e14c0984ba/IN-en-20230904-popsignuptwoweeks-perspective_alpha_website_large.jpg"
-          alt="Logo"
-          className="flex h-full"
-        />
-      </div>
       <form
         className="absolute p-12 bg-black w-1/4 my-36 mx-auto right-0 left-0 text-white bg-opacity-80 rounded-md"
         onSubmit={(e) => e.preventDefault()}
