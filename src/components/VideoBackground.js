@@ -9,18 +9,9 @@ const VideoBackground = ({ movieId }) => {
   useMovieTrailer(movieId);
 
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-      <style>
-        {`
-          body, html {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-          }
-        `}
-      </style>
+    <div className=" bg-gray-900 flex items-center justify-center">
       <iframe
-        className="w-full h-screen aspect-w-16 aspect-h-9"
+        className="w-screen h-screen aspect-w-16 aspect-h-9"
         src={
           "https://www.youtube-nocookie.com/embed/" +
           trailerVideo?.key +
