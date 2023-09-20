@@ -8,7 +8,12 @@ const VideoTitle = ({ title, overview }) => {
       <h1 className="text-6xl font-bold ">{title}</h1>
       <p className="py-6 text-lg w-1/4">{trimText(overview, 120)}</p>
       <div>
-        <button className="bg-white text-black text-xl px-8 py-2 rounded-lg hover:opacity-70">
+        <button
+          className="bg-white text-black text-xl px-8 py-2 rounded-lg hover:opacity-70"
+          onClick={() => {
+            throw new TypeError("Demo test error");
+          }}
+        >
           Play
         </button>
         <button className="mx-2 bg-gray-500 text-white text-xl px-8 py-2 bg-opacity-50 rounded-lg hover:opacity-70">
