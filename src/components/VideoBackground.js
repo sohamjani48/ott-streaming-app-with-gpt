@@ -10,6 +10,15 @@ const VideoBackground = ({ movieId }) => {
 
   return (
     <div className=" bg-gray-900 flex items-center justify-center">
+      <style>
+        {`
+          body, html {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+          }
+        `}
+      </style>
       <iframe
         className="w-screen h-screen aspect-w-16 aspect-h-9"
         src={
