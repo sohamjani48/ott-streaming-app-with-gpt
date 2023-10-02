@@ -1,15 +1,14 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 import usePopularMovies from "../hooks/usePopularMovies";
 import useTopRatedMovies from "../hooks/useTopRatedMovies";
 import useUpcomingMovies from "../hooks/useUpcomingMovies";
-import { API_OPTIONS } from "../utils/consts";
-import { addNowPlayingMovies } from "../utils/moviesSlice";
+import GPTSearch from "./GPTSearch";
 import Header from "./Header";
 import MainContainer from "./MainContainer";
 import SeconaryContainer from "./SeconaryContainer";
+import { useSelector } from "react-redux";
 
 const Browse = () => {
   useNowPlayingMovies();
@@ -17,19 +16,19 @@ const Browse = () => {
   useTopRatedMovies();
   useUpcomingMovies();
 
+  const showGPTSearch = useSelector((store) => store.gpt.showGPTSearch);
+
   return (
     <div>
-      <style>
-        {`
-          body, html {
-            margin: 0;
-            padding: 0;
-          }
-        `}
-      </style>
       <Header />
-      <MainContainer />
-      <SeconaryContainer />
+      {showGPTSearch ? (
+        <GPTSearch />
+      ) : (
+        <>
+          <MainContainer />
+          <SeconaryContainer />
+        </>
+      )}
     </div>
   );
 };

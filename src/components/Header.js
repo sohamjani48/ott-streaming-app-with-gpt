@@ -1,10 +1,13 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import React, { useEffect } from "react";
+import { FaHome, FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { APP_LOGO } from "../utils/consts";
+import { changeLanguage } from "../utils/configSlice";
+import { APP_LOGO, SUPPORTED_LANGUAGES } from "../utils/consts";
 import { auth } from "../utils/firebase";
+import { toggleGPTSearchView } from "../utils/gptSlice";
 import { loginUser, logoutUser } from "../utils/userSlice";
 
 const Header = () => {
@@ -12,6 +15,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
+  const showGPTSearch = useSelector((store) => store.gpt.showGPTSearch);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -32,7 +36,6 @@ const Header = () => {
       }
     });
 
-    //Unsubscribe when the component unmounts
     return () => unsubscribe();
   }, []);
 
@@ -46,11 +49,38 @@ const Header = () => {
       });
   };
 
+  const handleGPTSearchClick = () => {
+    dispatch(toggleGPTSearchView());
+  };
+
+  const handleLanuageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  };
+
   return (
     <div className="absolute p-4 w-56 bg-gradient-to-b from-black z-10 w-full flex justify-between">
       <img className=" w-44 h-12" src={APP_LOGO} alt="Logo" />
       {user && (
         <div className="flex p-2 gap-6">
+          {showGPTSearch && (
+            <select
+              className=" bg-gray-900 text-white rounded-lg px-2"
+              onChange={handleLanuageChange}
+            >
+              {SUPPORTED_LANGUAGES.map((language) => (
+                <option key={language.idenifier} value={language.idenifier}>
+                  {language.name}
+                </option>
+              ))}
+            </select>
+          )}
+          <button className="p-2" onClick={handleGPTSearchClick}>
+            {showGPTSearch ? (
+              <FaHome className="text-white text-2xl" />
+            ) : (
+              <FaSearch className="text-white text-2xl" />
+            )}
+          </button>
           <img
             className="w-12 h-12 rounded-lg"
             src={user.photoURL}

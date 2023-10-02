@@ -2,36 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @layer utilities {
-    .no-scrollbar::-webkit-scrollbar {
-        display: none;
-    }
-
-    .no-scrollbar{
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-} */
-
-/* Track */
 ::-webkit-scrollbar {
     width: 10px;
-    height: 10px;
-    background-color: black;
-}
-
-
-::-webkit-scrollbar-track {
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
     background: black;
-}
-
-
-::-webkit-scrollbar-thumb {
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: black;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: darkgray;
+  }
+  
+  /* Horizontal scrollbar (leave it as is) */
+  ::-webkit-scrollbar-thumb:horizontal {
+    height: 4px;
     background: gray;
     border-radius: 5px;
-}
-
-
-::-webkit-scrollbar-thumb:hover {
+  }
+  
+  ::-webkit-scrollbar-thumb:horizontal:hover {
     background: darkgray;
-}
+  }
+  
