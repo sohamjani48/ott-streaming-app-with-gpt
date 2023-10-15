@@ -22,5 +22,4 @@ export const SUPPORTED_LANGUAGES = [
   { idenifier: "es", name: "Spanish" },
 ];
 
-// export const OPENAI_KEY = "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"; //Old key for sohamjani13579 account
 export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;
