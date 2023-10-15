@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { changeLanguage } from "../utils/configSlice";
 import { APP_LOGO, SUPPORTED_LANGUAGES } from "../utils/consts";
 import { auth } from "../utils/firebase";
-import { toggleGPTSearchView } from "../utils/gptSlice";
+import { addSearchResults, toggleGPTSearchView } from "../utils/gptSlice";
 import { loginUser, logoutUser } from "../utils/userSlice";
 
 const Header = () => {
@@ -50,6 +50,7 @@ const Header = () => {
   };
 
   const handleGPTSearchClick = () => {
+    dispatch(addSearchResults({ movies: null, movieNames: null }));
     dispatch(toggleGPTSearchView());
   };
 
@@ -58,8 +59,8 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute p-4 w-56 bg-gradient-to-b from-black z-10 w-full flex justify-between">
-      <img className=" w-44 h-12" src={APP_LOGO} alt="Logo" />
+    <div className="absolute p-4 bg-gradient-to-b from-black z-10 w-full flex justify-between flex-col md:flex-row">
+      <img className=" w-44 h-12 mx-auto md:mx-0" src={APP_LOGO} alt="Logo" />
       {user && (
         <div className="flex p-2 gap-6">
           {showGPTSearch && (

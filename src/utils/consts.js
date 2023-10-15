@@ -10,8 +10,7 @@ export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNzRiMDhhNzFmNjkyOGJkOGRlYWRiM2JlNDZiZDZjZCIsInN1YiI6IjY1MDU5ZjMyMTA5ZGVjMDE0ZjQwOTQwOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vlfqWPZd22M8KoqWKKDmFO6y31WYB1eEntKhKHiyLis",
+    Authorization: "Bearer " + process.env.REACT_APP_TMDB_KEY,
   },
 };
 
@@ -22,3 +21,6 @@ export const SUPPORTED_LANGUAGES = [
   { idenifier: "hindi", name: "Hindi" },
   { idenifier: "es", name: "Spanish" },
 ];
+
+// export const OPENAI_KEY = "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"; //Old key for sohamjani13579 account
+export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;
